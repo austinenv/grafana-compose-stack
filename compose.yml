@@ -1,0 +1,24 @@
+services:
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: grafana-container
+    restart: unless-stopped
+    environment:
+      - GF_RENDERING_SERVER_URL=http://renderer:8081/render
+      - GF_RENDERING_CALLBACK_URL=http://grafana:3000/
+      - GF_LOG_FILTERS=rendering:debug
+    ports:
+     - '3000:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+  
+  renderer:
+    image: grafana/grafana-image-renderer:3.11.6
+    container_name: grafana-image-renderer-container
+    restart: unless-stopped
+    ports:
+      - '8081:8081'
+
+volumes:
+  grafana-storage: 
+    driver: local
