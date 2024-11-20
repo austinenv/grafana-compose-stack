@@ -1,6 +1,6 @@
 services:
   grafana:
-    image: grafana/grafana:11.3.0
+    image: grafana/grafana:latest
     container_name: grafana-container
     restart: unless-stopped
     environment:
@@ -13,7 +13,7 @@ services:
       - grafana-storage:/var/lib/grafana
   
   renderer:
-    image: grafana/grafana-image-renderer:3.11.6
+    image: grafana/grafana-image-renderer:latest
     container_name: grafana-image-renderer-container
     restart: unless-stopped
     ports:
